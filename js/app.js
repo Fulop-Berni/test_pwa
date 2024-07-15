@@ -37,27 +37,27 @@ if ("serviceWorker" in navigator) {
   })
 }
 
-let deferredPrompt; // Variable should be out of scope of addEventListener method
+let deferredPrompt; 
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();	// This prevents default chrome prompt from appearing
+    e.preventDefault();
                             
-    deferredPrompt = e;	 // Save for later
+    deferredPrompt = e;	
     let infoBar = document.querySelector('#custom-info-bar');
     if (infoBar) {
         infoBar.style.display = '';
         let installBtn = document.querySelector('#custom-install-button');
                             
         installBtn.addEventListener('click', (e) => {
-        //This prompt window
+  
         deferredPrompt.prompt();
-        // Here we wait for user interaction
+      
         deferredPrompt.userChoice
             .then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
                     let infoBar = document.querySelector('#custom-info-bar');
-                    infoBar.style.display = 'none'; // Hide info bar
-                    deferredPrompt = null; // not need anymore
+                    infoBar.style.display = 'none'; 
+                    deferredPrompt = null;
                 }
             });
         });
